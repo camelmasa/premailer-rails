@@ -71,7 +71,8 @@ class Premailer
         generate_text_part if generate_text_part?
 
         part = html_part
-        html = premailer.to_inline_css
+        # html = premailer.to_inline_css
+        html = premailer.to_inline_css.gsub(/<style>.+<\/style>/m, "")
         Mail::Part.new do
           content_transfer_encoding part.content_transfer_encoding
           content_type "text/html; charset=#{part.charset}"
